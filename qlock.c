@@ -6,7 +6,7 @@ p(ch)
 {
     i = x/2/(3 + 2);
     dx = x/2%(3 + 2);
-    if (i < 8 && (y - 4)/2 < 5 && dx < 3 && (f[d[i]]>>((5 - (y - 4)/2 - 1)*3 + dx))&1)
+    if (i < 8 && y / 2 - 2 < 5 && dx < 3 && (f[d[i]]>>(12 - (y / 2 - 2) * 3 + dx))&1)
         printf("\033[1;41;30m%c\033[0m", ch);
     else
         printf("%c", ch);
@@ -18,16 +18,16 @@ p(ch)
 }
 gd()
 {
-    time_t t = time(NULL);
-    struct tm *tm = localtime(&t);
-    d[0] = tm->tm_hour/10;
-    d[1] = tm->tm_hour%10;
+    long t = time(0);
+#define timezone -6
+    d[0] = (t/3600+timezone)%24/10;
+    d[1] = (t/3600+timezone)%24%10;
     d[2] = 10;
-    d[3] = tm->tm_min/10;
-    d[4] = tm->tm_min%10;
+    d[3] = t/60%60/10;
+    d[4] = t/60%10;
     d[5] = 10;
-    d[6] = tm->tm_sec/10;
-    d[7] = tm->tm_sec%10;
+    d[6] = t%60/10;
+    d[7] = t%10;
 }
 
 main()
