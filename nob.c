@@ -66,12 +66,13 @@ bool format_tokens(const char *output_path, const char *input_path)
     static char string_store[1024];
     stb_c_lexer_init(&l, sb.items, sb.items + sb.count, string_store, NOB_ARRAY_LEN(string_store));
 
-    int x = 0;
+    int x = 8;
     int prev_token = 0;
     while (stb_c_lexer_get_token(&l)) {
         int n = l.where_lastchar - l.where_firstchar + 1;
         if (is_unconcatable(prev_token) && is_unconcatable(l.token)) {
             fprintf(output, " ");
+            x += 1;
         }
         prev_token = l.token;
         fprintf(output, "%.*s", n, l.where_firstchar);
