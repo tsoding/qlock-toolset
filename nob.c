@@ -6,7 +6,8 @@
 bool build_exe(Nob_Cmd *cmd, const char *output_path, const char *input_path)
 {
     cmd->count = 0;
-    nob_cmd_append(cmd, "cc", "-Wall", "-Wextra");
+    // nob_cmd_append(cmd, "cc", "-Wall", "-Wextra");
+    nob_cmd_append(cmd, "cc", "-w", "-Dz=printf");
     nob_cmd_append(cmd, "-o", output_path);
     nob_cmd_append(cmd, "-include", "time.h");
     nob_cmd_append(cmd, input_path);
@@ -77,7 +78,7 @@ bool format_tokens(const char *output_path, const char *input_path)
         prev_token = l.token;
         fprintf(output, "%.*s", n, l.where_firstchar);
         x += n;
-        if (x >= 80) {
+        if (x >= 88) {
             fprintf(output, "\n");
             x = 0;
         }
